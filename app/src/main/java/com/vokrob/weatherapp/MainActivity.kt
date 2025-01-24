@@ -7,19 +7,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +46,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Preview
+
 @Composable
 fun WeatherScreen() {
     Box(
@@ -110,13 +116,82 @@ fun WeatherScreen() {
                             .padding(top = 8.dp),
                         textAlign = TextAlign.Center
                     )
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 24.dp,
+                                vertical = 16.dp
+                            )
+                            .background(
+                                color = colorResource(R.color.purple),
+                                shape = RoundedCornerShape(25.dp)
+                            )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(100.dp)
+                                .padding(horizontal = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            WeatherDetailItem(
+                                icon = R.drawable.rain,
+                                value = "22%",
+                                label = "Rain"
+                            )
+
+                            WeatherDetailItem(
+                                icon = R.drawable.wind,
+                                value = "22%",
+                                label = "Wind Speed"
+                            )
+
+                            WeatherDetailItem(
+                                icon = R.drawable.humidity,
+                                value = "18%",
+                                label = "Humidity"
+                            )
+                        }
+                    }
                 }
             }
         }
     }
 }
 
+@Composable
+fun WeatherDetailItem(
+    icon: Int,
+    value: String,
+    label: String
+) {
+    Column(
+        modifier = Modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(icon),
+            contentDescription = null,
+            modifier = Modifier.size(34.dp)
+        )
 
+        Text(
+            text = value,
+            fontWeight = FontWeight.Bold,
+            color = colorResource(R.color.white),
+            textAlign = TextAlign.Center
+        )
+
+        Text(
+            text = label,
+            color = colorResource(R.color.white),
+            textAlign = TextAlign.Center
+        )
+    }
+}
 
 
 
