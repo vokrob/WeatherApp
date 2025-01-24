@@ -156,6 +156,18 @@ fun WeatherScreen() {
                             )
                         }
                     }
+
+                    Text(
+                        text = "Today",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 24.dp,
+                                vertical = 8.dp
+                            )
+                    )
                 }
             }
         }
