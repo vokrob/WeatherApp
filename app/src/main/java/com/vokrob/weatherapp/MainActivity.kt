@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,6 +83,27 @@ fun WeatherScreen() {
                     Text(
                         text = "Mon June 17 | 10:00 AM",
                         fontSize = 19.sp,
+                        color = Color.White,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        textAlign = TextAlign.Center
+                    )
+
+                    Text(
+                        text = "25°C",
+                        fontSize = 63.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        textAlign = TextAlign.Center
+                    )
+
+                    Text(
+                        text = "H:27 L:18",
+                        fontSize = 16.sp,
                         color = Color.White,
                         modifier = Modifier
                             .fillMaxWidth()
