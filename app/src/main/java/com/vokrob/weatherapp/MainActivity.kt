@@ -10,6 +10,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -76,6 +77,16 @@ fun WeatherScreen() {
                         modifier = Modifier
                             .size(150.dp)
                             .padding(top = 8.dp)
+                    )
+
+                    Text(
+                        text = "Mon June 17 | 10:00 AM",
+                        fontSize = 19.sp,
+                        color = Color.White,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                        textAlign = TextAlign.Center
                     )
                 }
             }
