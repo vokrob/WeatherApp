@@ -178,7 +178,7 @@ fun WeatherScreen() {
                         contentPadding = PaddingValues(horizontal = 20.dp),
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        item {
+                        item(items) {
 
                         }
                     }
@@ -187,6 +187,38 @@ fun WeatherScreen() {
         }
     }
 }
+
+val items = listOf(
+    HourlyModel(
+        "9 pm",
+        28,
+        "cloudy"
+    ),
+
+    HourlyModel(
+        "10 pm",
+        29,
+        "sunny"
+    ),
+
+    HourlyModel(
+        "11 pm",
+        30,
+        "wind"
+    ),
+
+    HourlyModel(
+        "12 pm",
+        31,
+        "rainy"
+    ),
+
+    HourlyModel(
+        "1 am",
+        28,
+        "storm"
+    )
+)
 
 @Composable
 fun WeatherDetailItem(
