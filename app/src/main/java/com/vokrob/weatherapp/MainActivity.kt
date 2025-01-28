@@ -211,10 +211,62 @@ fun WeatherScreen() {
                         )
                     }
                 }
+
+                items(dailyItems) { }
             }
         }
     }
 }
+
+val dailyItems = listOf(
+    FutureModel(
+        "Sat",
+        "storm",
+        "Storm",
+        24,
+        12
+    ),
+
+    FutureModel(
+        "Sun",
+        "cloudy",
+        "Cloudy",
+        25,
+        16
+    ),
+
+    FutureModel(
+        "Mon",
+        "windy",
+        "Windy",
+        29,
+        15
+    ),
+
+    FutureModel(
+        "Tue",
+        "cloudy_sunny",
+        "Cloudy Sunny",
+        23,
+        15
+    ),
+
+    FutureModel(
+        "Wen",
+        "sunny",
+        "Sunny",
+        28,
+        11
+    ),
+
+    FutureModel(
+        "Thu",
+        "rainy",
+        "Rainy",
+        23,
+        12
+    )
+)
 
 @Composable
 fun FutureModelViewHolder(model: HourlyModel) {
