@@ -1,7 +1,9 @@
 package com.vokrob.weatherapp
 
 import android.graphics.Color.parseColor
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -37,7 +39,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vokrob.weatherapp.ui.theme.WeatherAppTheme
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +48,17 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
 
-        setContent {
-            WeatherAppTheme { }
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            hide(WindowInsetsCompat.Type.statusBars())
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            window.attributes.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        }
+
+        setContent { WeatherScreen() }
     }
 }
 
@@ -151,7 +162,7 @@ fun WeatherScreen() {
 
                             WeatherDetailItem(
                                 icon = R.drawable.wind,
-                                value = "22%",
+                                value = "12 Km/h",
                                 label = "Wind Speed"
                             )
 
@@ -167,6 +178,7 @@ fun WeatherScreen() {
                         text = "Today",
                         fontSize = 20.sp,
                         color = Color.White,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(
@@ -200,6 +212,7 @@ fun WeatherScreen() {
                             text = "Future",
                             fontSize = 20.sp,
                             color = Color.White,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier.weight(1f)
                         )
 
@@ -212,9 +225,72 @@ fun WeatherScreen() {
                     }
                 }
 
-                items(dailyItems) { }
+                items(dailyItems) { FutureItem(it) }
             }
         }
+    }
+}
+
+@Composable
+fun FutureItem(item: FutureModel) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                horizontal = 24.dp,
+                vertical = 4.dp
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = item.day,
+            color = Color.White,
+            fontSize = 14.sp
+        )
+
+        Image(
+            painter = painterResource(getDrawableResourceId(item.picPath)),
+            contentDescription = null,
+            modifier = Modifier
+                .padding(start = 32.dp)
+                .size(45.dp)
+        )
+
+        Text(
+            text = item.status,
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 16.dp),
+            color = Color.White,
+            fontSize = 14.sp
+        )
+
+        Text(
+            text = "${item.highTemp}°C",
+            modifier = Modifier.padding(end = 16.dp),
+            color = Color.White,
+            fontSize = 14.sp
+        )
+
+        Text(
+            text = "${item.lowTemp}°C",
+            color = Color.White,
+            fontSize = 14.sp
+        )
+    }
+}
+
+@Composable
+fun getDrawableResourceId(picPath: String): Int {
+    return when (picPath) {
+        "storm" -> R.drawable.storm
+        "cloudy" -> R.drawable.cloudy
+        "windy" -> R.drawable.windy
+        "cloudy_sunny" -> R.drawable.cloudy_sunny
+        "sunny" -> R.drawable.sunny
+        "rainy" -> R.drawable.rainy
+
+        else -> R.drawable.sunny
     }
 }
 
